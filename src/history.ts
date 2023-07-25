@@ -1,5 +1,5 @@
-import { createMemoryHistory } from 'history'
+import { createMemoryHistory } from "history";
 
-const history = createMemoryHistory()
+const history = createMemoryHistory();
 
-export default history
+export default history;

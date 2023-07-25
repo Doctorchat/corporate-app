@@ -1,5 +1,10 @@
 /* eslint-disable no-undef */
 module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+    node: true,
+  },
   extends: [
     "eslint:recommended",
     "plugin:import/recommended",
@@ -15,20 +20,21 @@ module.exports = {
       version: "detect",
     },
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"] // use typescript-eslint parser for .ts|tsx files.
+      "@typescript-eslint/parser": [".ts", ".tsx"], // use typescript-eslint parser for .ts|tsx files.
     },
     "import/resolver": {
       typescript: {
         project: "./tsconfig.eslint.json",
-        alwaysTryTypes: true // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`.
-      }
-    }
+        alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`.
+      },
+    },
   },
   rules: {
-    "react-refresh/only-export-components": [
-      "warn",
-      { "allowConstantExport": true }
-    ],
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-empty-function": "off",
+
+    "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
     "react/react-in-jsx-scope": "off",
     "import/first": "warn",
     "import/default": "off",
@@ -40,12 +46,12 @@ module.exports = {
     "react/jsx-sort-props": [
       "warn",
       {
-        "callbacksLast": true,
-        "shorthandFirst": true,
-        "ignoreCase": true,
-        "reservedFirst": true,
-        "noSortAlphabetically": true
-      }
-    ]
+        callbacksLast: true,
+        shorthandFirst: true,
+        ignoreCase: true,
+        reservedFirst: true,
+        noSortAlphabetically: true,
+      },
+    ],
   },
 };
