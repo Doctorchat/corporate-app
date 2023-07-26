@@ -24,20 +24,20 @@ const PurchasesTable = ({ data, loading, tableData, updateTableData }: Purchases
     () => [
       {
         header: t("client"),
-        accessorKey: "client",
+        accessorKey: "user_name",
       },
       {
         header: t("doctor"),
-        accessorKey: "doctor",
+        accessorKey: "doctor_name",
       },
       {
         header: t("price"),
-        accessorKey: "price",
+        accessorKey: "amount",
         cell: (props) => {
           return (
             <NumericFormat
               displayType="text"
-              value={props.row.original.price}
+              value={Number(props.row.original.amount)}
               suffix=" MDL"
               thousandSeparator={true}
             />

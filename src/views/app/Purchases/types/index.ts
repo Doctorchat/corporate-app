@@ -1,8 +1,8 @@
 export interface Purchase {
   id: number;
-  client: string;
-  doctor: string;
-  price: number;
+  user_name: string;
+  doctor_name: string;
+  amount: string;
   created_at: string;
 }
 

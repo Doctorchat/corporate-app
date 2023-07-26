@@ -9,6 +9,8 @@ import { useTranslation } from "react-i18next";
 import { Button, Dialog } from "@/components/ui";
 import { TableQueries } from "@/@types/common";
 import { Employee } from "../types";
+import { apiDeleteEmployee, apiValidateEmployee } from "@/services/EmployeesService";
+import { useQueryClient } from "react-query";
 
 const orderStatusColor: Record<
   number,
@@ -33,8 +35,27 @@ const orderStatusColor: Record<
 const ActionColumn = ({ row }: { row: Employee }) => {
   const { t } = useTranslation();
 
+  const queryClient = useQueryClient();
+
   const [isAcceptDialogOpen, setIsAcceptDialogOpen] = useState(false);
   const [isCancelDialogOpen, setIsCancelDialogOpen] = useState(false);
+  const [loading, setLoading] = useState<"accept" | "decline" | null>(null);
+
+  const handleValidateEmployee = async () => {
+    setLoading("accept");
+    await apiValidateEmployee(row.id);
+    await queryClient.invalidateQueries("employees");
+    setLoading(null);
+    setIsAcceptDialogOpen(false);
+  };
+
+  const handleDeleteEmployee = async () => {
+    setLoading("decline");
+    await apiDeleteEmployee(row.id);
+    await queryClient.invalidateQueries("employees");
+    setLoading(null);
+    setIsCancelDialogOpen(false);
+  };
 
   if (row.is_verified_by_company) {
     return null;
@@ -77,7 +98,12 @@ const ActionColumn = ({ row }: { row: Employee }) => {
           >
             {t("cancel")}
           </Button>
-          <Button variant="solid" size="sm" onClick={() => setIsAcceptDialogOpen(false)}>
+          <Button
+            variant="solid"
+            size="sm"
+            loading={loading === "accept"}
+            onClick={handleValidateEmployee}
+          >
             {t("accept")}
           </Button>
         </div>
@@ -99,7 +125,12 @@ const ActionColumn = ({ row }: { row: Employee }) => {
           >
             {t("cancel")}
           </Button>
-          <Button variant="solid" size="sm" onClick={() => setIsCancelDialogOpen(false)}>
+          <Button
+            variant="solid"
+            size="sm"
+            loading={loading === "decline"}
+            onClick={handleDeleteEmployee}
+          >
             {t("decline")}
           </Button>
         </div>

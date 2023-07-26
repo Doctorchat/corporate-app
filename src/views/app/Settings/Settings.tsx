@@ -3,11 +3,11 @@ import { Button, FormContainer, Input, Notification, toast } from "@/components/
 import { Field, Form, Formik } from "formik";
 import { useTranslation } from "react-i18next";
 import FormRow from "./components/FormRow";
-import { HiOutlineUserCircle } from "react-icons/hi";
+import { HiOutlinePhone } from "react-icons/hi2";
 import * as Yup from "yup";
 
 const validationSchema = Yup.object().shape({
-  phone: Yup.string().min(3, "Too Short!").max(12, "Too Long!").required("User Name Required"),
+  phone: Yup.string().required("validations.required"),
 });
 
 const Settings = () => {
@@ -53,7 +53,7 @@ const Settings = () => {
                     name="name"
                     placeholder={t("phone")}
                     component={Input}
-                    prefix={<HiOutlineUserCircle className="text-xl" />}
+                    prefix={<HiOutlinePhone className="text-xl" />}
                   />
                   <div className="text-xs text-gray-500 mt-1">{t("phone_description")}</div>
                 </FormRow>

@@ -30,5 +30,15 @@
   "save": "Salvează",
   "saving": "Se salvează",
   "reset": "Resetează",
-  "phone_description": "Arătat ca numărul de contact al angajatului."
+  "phone_description": "Arătat ca numărul de contact al angajatului.",
+  "email_address": "Adresă de email",
+  "password": "Parola",
+  "forgot_password": "Ai uitat parola?",
+  "login": "Autentificare",
+  "welcome_back": "Bine ai revenit!",
+  "enter_credential_to_login": "Introdu credențialele pentru a te autentifica.",
+  "validations": {
+    "required": "Câmpul este obligatoriu.",
+    "invalid_email": "Adresa de email nu este validă."
+  }
 }

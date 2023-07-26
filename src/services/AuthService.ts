@@ -1,48 +1,35 @@
-import ApiService from './ApiService'
-import type {
-    SignInCredential,
-    SignUpCredential,
-    ForgotPassword,
-    ResetPassword,
-    SignInResponse,
-    SignUpResponse,
-} from '@/@types/auth'
+import ApiService from "./ApiService";
+import type { SignInCredential, SignInResponse } from "@/@types/auth";
 
 export async function apiSignIn(data: SignInCredential) {
-    return ApiService.fetchData<SignInResponse>({
-        url: '/sign-in',
-        method: 'post',
-        data,
-    })
-}
-
-export async function apiSignUp(data: SignUpCredential) {
-    return ApiService.fetchData<SignUpResponse>({
-        url: '/sign-up',
-        method: 'post',
-        data,
-    })
+  return ApiService.fetchData<SignInResponse>({
+    url: "/auth/companies/login",
+    method: "post",
+    data,
+  });
 }
 
 export async function apiSignOut() {
-    return ApiService.fetchData({
-        url: '/sign-out',
-        method: 'post',
-    })
+  return ApiService.fetchData({
+    url: "/auth/companies/logout",
+    method: "post",
+  });
 }
 
-export async function apiForgotPassword(data: ForgotPassword) {
-    return ApiService.fetchData({
-        url: '/forgot-password',
-        method: 'post',
-        data,
-    })
+export async function apiAuthRevalidate() {
+  return ApiService.fetchData<SignInResponse>({
+    url: "/auth/companies/company",
+    method: "get",
+  });
 }
 
-export async function apiResetPassword(data: ResetPassword) {
-    return ApiService.fetchData({
-        url: '/reset-password',
-        method: 'post',
-        data,
-    })
+export async function apiEmulateSignIn(hash: string, id: string) {
+  return ApiService.fetchData<SignInResponse>({
+    url: `/auth/companies/emulate`,
+    method: "post",
+    data: {
+      hash,
+      id,
+    },
+  });
 }

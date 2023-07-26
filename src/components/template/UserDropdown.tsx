@@ -7,6 +7,7 @@ import classNames from "classnames";
 import { HiOutlineLogout, HiOutlineUser, HiOutlineCog } from "react-icons/hi";
 import type { CommonProps } from "@/@types/common";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "@/store";
 
 type DropdownList = {
   label: string;
@@ -26,12 +27,13 @@ const _UserDropdown = ({ className }: CommonProps) => {
   const { t } = useTranslation();
 
   const { signOut } = useAuth();
+  const company = useAppSelector((state) => state.auth.user);
 
   const UserAvatar = (
     <div className={classNames(className, "flex items-center gap-2")}>
       <Avatar size={32} shape="circle" icon={<HiOutlineUser />} />
       <div className="hidden md:block">
-        <div className="font-bold">User01</div>
+        <div className="font-bold">{company.name}</div>
       </div>
     </div>
   );
@@ -43,8 +45,8 @@ const _UserDropdown = ({ className }: CommonProps) => {
           <div className="py-2 px-3 flex items-center gap-2">
             <Avatar shape="circle" icon={<HiOutlineUser />} />
             <div>
-              <div className="font-bold text-gray-900 dark:text-gray-100">User01</div>
-              <div className="text-xs">user01@mail.com</div>
+              <div className="font-bold text-gray-900 dark:text-gray-100">{company.email}</div>
+              <div className="text-xs">{company.name}</div>
             </div>
           </div>
         </Dropdown.Item>

@@ -1,9 +1,23 @@
 import AdaptableCard from "@/components/shared/AdaptableCard";
 import EmployeesTable from "./components/EmployeesTable";
 import { useTranslation } from "react-i18next";
+import { useQuery } from "react-query";
+import { apiGetEmployees } from "@/services/EmployeesService";
+import { GetEmployeesResponse } from "./types";
+import { useSessionStorage } from "usehooks-ts";
 
 const Employees = () => {
   const { t } = useTranslation();
+
+  const [state, setState] = useSessionStorage("employees-state", {
+    page: 1,
+  });
+
+  const { data, isLoading } = useQuery(["employees"], () =>
+    apiGetEmployees<{ employees: GetEmployeesResponse }, { page: number }>({
+      page: state.page,
+    })
+  );
 
   return (
     <AdaptableCard className="h-full" bodyClass="h-full">
@@ -11,29 +25,16 @@ const Employees = () => {
         <h3 className="mb-4 lg:mb-0">{t("employees")}</h3>
       </div>
       <EmployeesTable
-        data={[
-          {
-            id: 1,
-            name: "Nguyen Van A",
-            phone: "0123456789",
-            is_verified_by_company: false,
-            created_at: "2021-08-01 12:00:00",
-          },
-          {
-            id: 2,
-            name: "Nguyen Van B",
-            phone: "0123456789",
-            is_verified_by_company: true,
-            created_at: "2021-08-01 12:00:00",
-          },
-        ]}
-        loading={false}
+        data={data?.data.employees.data ?? []}
+        loading={isLoading}
         tableData={{
-          pageIndex: 1,
-          pageSize: 10,
-          total: 2,
+          pageIndex: data?.data.employees.current_page ?? 1,
+          pageSize: data?.data.employees.per_page ?? 10,
+          total: data?.data.employees.total ?? 0,
         }}
-        updateTableData={() => {}}
+        updateTableData={({ pageIndex }) => {
+          setState({ page: (pageIndex ?? 0) + 1 });
+        }}
       />
     </AdaptableCard>
   );

@@ -5,13 +5,22 @@ import { useNavigate } from "react-router-dom";
 import { NumericFormat } from "react-number-format";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
+import useAuth from "@/utils/hooks/useAuth";
+import { useAppSelector } from "@/store";
 
 const { Tr, Th, Td, THead, TBody } = Table;
 
 const Dashboard = () => {
   const { t } = useTranslation();
+  const { revalidateAuth } = useAuth();
 
   const navigate = useNavigate();
+  const company = useAppSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    // revalidateAuth();
+  }, [revalidateAuth]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -35,36 +44,14 @@ const Dashboard = () => {
                 </Tr>
               </THead>
               <TBody>
-                {[
-                  {
-                    id: 1,
-                    client: "Nguyen Van A",
-                    doctor: "Nguyen Van A",
-                    price: 200,
-                    created_at: "2021-08-01 12:00:00",
-                  },
-                  {
-                    id: 2,
-                    client: "Nguyen Van B",
-                    doctor: "Nguyen Van B",
-                    price: 200,
-                    created_at: "2021-08-01 12:00:00",
-                  },
-                  {
-                    id: 3,
-                    client: "Nguyen Van C",
-                    doctor: "Nguyen Van C",
-                    price: 200,
-                    created_at: "2021-08-01 12:00:00",
-                  },
-                ].map((item) => (
-                  <Tr key={item.id}>
-                    <Td>{item.client}</Td>
-                    <Td>{item.doctor}</Td>
+                {company?.transactions?.map((item) => (
+                  <Tr key={item.transaction_id}>
+                    <Td>{item.user_name}</Td>
+                    <Td>{item.doctor_name}</Td>
                     <Td>
                       <NumericFormat
                         displayType="text"
-                        value={item.price}
+                        value={Number(item.amount)}
                         suffix=" MDL"
                         thousandSeparator={true}
                       />
