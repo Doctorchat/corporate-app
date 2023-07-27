@@ -1,9 +1,9 @@
-name: Doctochat Dev CI/CD
+name: Doctochat Prod CI/CD
 
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   build:
@@ -17,9 +17,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Create env configs
-        run: |
-          echo "${{ secrets.API_PATH_MD }}" >> .env
       - name: Build
         run: CI=false npm run build
       - name: SSH Server Deploy MD
