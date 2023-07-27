@@ -29,5 +29,5 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           password: ${{ secrets.SSH_PASS }}
           private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
-          scp_source: "out/"
+          scp_source: "build/"
           scp_target: ${{ secrets.TARGET_COMPANY_APP }}
