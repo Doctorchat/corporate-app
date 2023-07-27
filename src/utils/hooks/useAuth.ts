@@ -77,11 +77,17 @@ function useAuth() {
   const revalidateAuth = useCallback(async () => {
     try {
       const resp = await apiAuthRevalidate();
-      console.log(resp.data);
+      if (resp.data) {
+        if (resp.data.company) {
+          dispatch(
+            setUser({ ...resp.data.company, authority: [], transactions: resp.data.transactions })
+          );
+        }
+      }
     } catch (errors: any) {
       handleSignOut();
     }
-  }, [handleSignOut]);
+  }, [dispatch, handleSignOut]);
 
   const emulateSignIn = useCallback(
     async (hash: string, id: string) => {
@@ -91,8 +97,6 @@ function useAuth() {
           const { token } = resp.data;
           dispatch(signInSuccess(token));
           if (resp.data.company) {
-            console.log(resp.data);
-
             dispatch(
               setUser({ ...resp.data.company, authority: [], transactions: resp.data.transactions })
             );

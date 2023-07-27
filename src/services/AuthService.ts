@@ -17,8 +17,8 @@ export async function apiSignOut() {
 }
 
 export async function apiAuthRevalidate() {
-  return ApiService.fetchData<SignInResponse>({
-    url: "/auth/companies/company",
+  return ApiService.fetchData<Omit<SignInResponse, "token">>({
+    url: "/companies/company",
     method: "get",
   });
 }

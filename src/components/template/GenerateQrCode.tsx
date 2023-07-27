@@ -13,7 +13,7 @@ export const GenerateQrCodeContent: React.FC<React.HTMLAttributes<HTMLDivElement
   className,
 }) => {
   const { t } = useTranslation();
-  const { data } = useQuery(["invite-info"], () => apiGetInviteInfo(), {
+  const { data, isLoading } = useQuery(["invite-info"], () => apiGetInviteInfo(), {
     refetchOnWindowFocus: false,
   });
 
@@ -46,7 +46,7 @@ export const GenerateQrCodeContent: React.FC<React.HTMLAttributes<HTMLDivElement
     <div className={classNames(className)}>
       <div className="p-1 border rounded-lg">
         <img
-          src={data?.data.qr}
+          src={isLoading ? "" : data?.data.qr}
           alt="QR Code"
           className="w-full h-full aspect-square object-contain"
         />

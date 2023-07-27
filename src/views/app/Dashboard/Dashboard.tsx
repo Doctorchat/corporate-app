@@ -19,7 +19,7 @@ const Dashboard = () => {
   const company = useAppSelector((state) => state.auth.user);
 
   useEffect(() => {
-    // revalidateAuth();
+    revalidateAuth();
   }, [revalidateAuth]);
 
   return (
