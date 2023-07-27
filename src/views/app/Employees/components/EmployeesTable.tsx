@@ -33,7 +33,7 @@ const orderStatusColor: Record<
   },
 };
 
-const ActionColumn = ({ row }: { row: Employee }) => {
+export const ActionColumn = ({ row }: { row: Employee }) => {
   const { t } = useTranslation();
 
   const queryClient = useQueryClient();
@@ -82,11 +82,12 @@ const ActionColumn = ({ row }: { row: Employee }) => {
         icon={<HiX />}
         onClick={() => setIsDeleteDialogOpen(true)}
       >
-        {t("decline")}
+        {t("delete")}
       </Button>
       <Button
         size="xs"
         variant="twoTone"
+        color="emerald"
         icon={<HiOutlineCheck />}
         onClick={() => setIsAcceptDialogOpen(true)}
       >

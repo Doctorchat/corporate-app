@@ -50,5 +50,6 @@
     "medical_verdict_request": "Cerere aviz medical"
   },
   "type": "Tip",
-  "menu": "Meniu"
+  "menu": "Meniu",
+  "validations_requests": "Cereri de validare"
 }

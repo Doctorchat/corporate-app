@@ -7,8 +7,8 @@
   "status": "Статус",
   "approved": "Подтвержден",
   "pending": "В ожидании",
-  "purchases": "Покупки",
-  "recent_purchases": "Последние покупки",
+  "purchases": "Транзакции",
+  "recent_purchases": "Последние транзакции",
   "view_all": "Посмотреть все",
   "current_balance": "Текущий баланс",
   "total_purchases": "Всего транзакций",
@@ -50,5 +50,6 @@
     "medical_verdict_request": "Запрос медицинского заключения"
   },
   "type": "Тип",
-  "menu": "Меню"
+  "menu": "Меню",
+  "validations_requests": "Запросы на проверку"
 }
