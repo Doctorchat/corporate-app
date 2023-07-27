@@ -3,6 +3,12 @@ export interface Purchase {
   user_name: string;
   doctor_name: string;
   amount: string;
+  transaction_type:
+    | "chat_auto"
+    | "chat_text"
+    | "chat_video"
+    | "file_attachment"
+    | "medical_verdict_request";
   created_at: string;
 }
 

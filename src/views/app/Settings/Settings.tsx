@@ -1,26 +1,56 @@
 import AdaptableCard from "@/components/shared/AdaptableCard";
-import { Button, FormContainer, Input, Notification, toast } from "@/components/ui";
-import { Field, Form, Formik } from "formik";
+import { Button, FormContainer, Notification, toast } from "@/components/ui";
+import { Form, Formik } from "formik";
 import { useTranslation } from "react-i18next";
 import FormRow from "./components/FormRow";
-import { HiOutlinePhone } from "react-icons/hi2";
+import PhoneInput from "react-phone-input-2";
+import { isValidPhoneNumber } from "libphonenumber-js/min";
+import { apiChangeContactNumber } from "@/services/AuthService";
+import { setUserProperty, useAppDispatch, useAppSelector } from "@/store";
 import * as Yup from "yup";
 
+import "react-phone-input-2/lib/style.css";
+import "./styles/index.css";
+
 const validationSchema = Yup.object().shape({
-  phone: Yup.string().required("validations.required"),
+  phone: Yup.string()
+    .test("phone", "validations.invalid_phone", (value) => {
+      const withPlus = value?.startsWith("+") ? value : `+${value}`;
+      return isValidPhoneNumber(withPlus || "");
+    })
+    .required("validations.required"),
 });
 
 const Settings = () => {
   const { t } = useTranslation();
 
-  const onFormSubmit = (
+  const dispatch = useAppDispatch();
+  const company = useAppSelector((state) => state.auth.user);
+
+  const onFormSubmit = async (
     values: { phone: string },
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
-    toast.push(<Notification title={"Profile updated"} type="success" />, {
-      placement: "top-center",
-    });
-    setSubmitting(false);
+    try {
+      await apiChangeContactNumber({
+        contact_number: values.phone,
+      });
+      dispatch(
+        setUserProperty({
+          contact_number: values.phone,
+        })
+      );
+      toast.push(<Notification title={"Profile updated"} type="success" />, {
+        placement: "top-center",
+      });
+    } catch (error: any) {
+      const message = error.response?.data?.message || error.message;
+      toast.push(<Notification title={message} type="danger" />, {
+        placement: "top-center",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -31,29 +61,32 @@ const Settings = () => {
 
       <Formik
         initialValues={{
-          phone: "",
+          phone: company?.contact_number || "",
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
-          setTimeout(() => {
-            onFormSubmit(values, setSubmitting);
-          }, 1000);
+          onFormSubmit(values, setSubmitting);
         }}
       >
-        {({ touched, errors, isSubmitting, resetForm }) => {
+        {({ values, touched, errors, isSubmitting, resetForm, ...formProps }) => {
           const validatorProps = { touched, errors };
           return (
             <Form>
               <FormContainer>
                 <FormRow name="phone" label={t("phone")} {...validatorProps}>
-                  <Field
-                    type="text"
-                    autoComplete="off"
-                    name="name"
-                    placeholder={t("phone")}
-                    component={Input}
-                    prefix={<HiOutlinePhone className="text-xl" />}
+                  <PhoneInput
+                    countryCodeEditable={false}
+                    country="md"
+                    preferredCountries={["md"]}
+                    regions={["america", "europe"]}
+                    containerClass="phone-input__container"
+                    inputClass="phone-input__input"
+                    buttonClass="phone-input__button"
+                    dropdownClass="phone-input__dropdown"
+                    value={values.phone}
+                    onChange={(phone) => formProps.setFieldValue("phone", phone)}
+                    onBlur={() => formProps.setFieldTouched("phone", true)}
                   />
                   <div className="text-xs text-gray-500 mt-1">{t("phone_description")}</div>
                 </FormRow>

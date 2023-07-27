@@ -25,7 +25,7 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col gap-4">
       <Statistic />
-      <div className="flex gap-4">
+      <div className="flex gap-4 flex-col xl:flex-row">
         <div className="flex-auto">
           <Card>
             <div className="flex items-center justify-between mb-6">
@@ -63,7 +63,7 @@ const Dashboard = () => {
             </Table>
           </Card>
         </div>
-        <div className="xl:w-[380px]">
+        <div className="xl:w-[380px] max-w-sm mr-auto w-full">
           <GenerateQrCodeContent className="p-0" />
         </div>
       </div>

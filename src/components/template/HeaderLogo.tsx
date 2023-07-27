@@ -1,10 +1,7 @@
-import Logo from '@/components/template/Logo'
-import { useAppSelector } from '@/store'
+import Logo from "@/components/template/Logo";
 
 const HeaderLogo = () => {
-    const mode = useAppSelector((state) => state.theme.mode)
+  return <Logo className="hidden md:block" />;
+};
 
-    return <Logo mode={mode} className="hidden md:block" />
-}
-
-export default HeaderLogo
+export default HeaderLogo;

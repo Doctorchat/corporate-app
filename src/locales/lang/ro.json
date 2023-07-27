@@ -30,7 +30,7 @@
   "save": "Salvează",
   "saving": "Se salvează",
   "reset": "Resetează",
-  "phone_description": "Arătat ca numărul de contact al angajatului.",
+  "phone_description": "Afișat angajatului ca număr de contact pentru urgentarea validării contului.",
   "email_address": "Adresă de email",
   "password": "Parola",
   "forgot_password": "Ai uitat parola?",
@@ -39,6 +39,15 @@
   "enter_credential_to_login": "Introdu credențialele pentru a te autentifica.",
   "validations": {
     "required": "Câmpul este obligatoriu.",
-    "invalid_email": "Adresa de email nu este validă."
-  }
+    "invalid_email": "Adresa de email nu este validă.",
+    "invalid_phone": "Numărul de telefon nu este valid."
+  },
+  "transaction_type": {
+    "chat_auto": "Chat automat",
+    "chat_text": "Chat text",
+    "chat_video": "Chat video",
+    "file_attachment": "Fișier",
+    "medical_verdict_request": "Cerere aviz medical"
+  },
+  "type": "Tip"
 }

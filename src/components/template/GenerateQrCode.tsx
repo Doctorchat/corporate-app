@@ -6,15 +6,22 @@ import type { CommonProps } from "@/@types/common";
 import { Button, Tooltip } from "../ui";
 import { useTranslation } from "react-i18next";
 import React from "react";
+import { useQuery } from "react-query";
+import { apiGetInviteInfo } from "@/services/AuthService";
 
 export const GenerateQrCodeContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   className,
 }) => {
   const { t } = useTranslation();
+  const { data } = useQuery(["invite-info"], () => apiGetInviteInfo(), {
+    refetchOnWindowFocus: false,
+  });
 
   const [isCopied, setIsCopied] = React.useState(false);
 
-  const handleCopy = (url: string) => {
+  const handleCopy = (url?: string) => {
+    if (!url) return;
+
     navigator.clipboard.writeText(url);
 
     setIsCopied(true);
@@ -23,7 +30,9 @@ export const GenerateQrCodeContent: React.FC<React.HTMLAttributes<HTMLDivElement
     }, 1000);
   };
 
-  const handeleDownload = (url: string) => {
+  const handleDownload = (url?: string) => {
+    if (!url) return;
+
     const link = document.createElement("a");
 
     link.href = url;
@@ -37,7 +46,7 @@ export const GenerateQrCodeContent: React.FC<React.HTMLAttributes<HTMLDivElement
     <div className={classNames(className)}>
       <div className="p-1 border rounded-lg">
         <img
-          src="https://cdn.ttgtmedia.com/rms/misc/qr_code_barcode.jpg"
+          src={data?.data.qr}
           alt="QR Code"
           className="w-full h-full aspect-square object-contain"
         />
@@ -52,9 +61,9 @@ export const GenerateQrCodeContent: React.FC<React.HTMLAttributes<HTMLDivElement
             "mt-2 border rounded-lg flex items-center justify-center overflow-hidden py-1 px-2 cursor-pointer select-none",
             "hover:bg-gray-100 border-gray-200"
           )}
-          onClick={() => handleCopy("https://cdn.ttgtmedia.com/rms/misc/qr_code_barcode.jpg")}
+          onClick={() => handleCopy(data?.data.url)}
         >
-          <span className="truncate">https://cdn.ttgtmedia.com/rms/misc/qr_code_barcode.jpg</span>
+          <span className="truncate">{data?.data.url}</span>
           {isCopied ? (
             <HiOutlineCheck className="w-6 flex-shrink-0 h-6 ml-2 text-emerald-500" />
           ) : (
@@ -73,7 +82,7 @@ export const GenerateQrCodeContent: React.FC<React.HTMLAttributes<HTMLDivElement
         variant="solid"
         size="sm"
         className="w-full mt-2"
-        onClick={() => handeleDownload("https://cdn.ttgtmedia.com/rms/misc/qr_code_barcode.jpg")}
+        onClick={() => handleDownload(data?.data.qr)}
       >
         {t("download_qrcode")}
       </Button>

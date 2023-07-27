@@ -33,3 +33,18 @@ export async function apiEmulateSignIn(hash: string, id: string) {
     },
   });
 }
+
+export async function apiChangeContactNumber(data: { contact_number: string }) {
+  return ApiService.fetchData({
+    url: "/companies/change-contact-number",
+    method: "put",
+    data,
+  });
+}
+
+export async function apiGetInviteInfo() {
+  return ApiService.fetchData<{ qr: string; url: string }>({
+    url: `/companies/invite`,
+    method: "get",
+  });
+}

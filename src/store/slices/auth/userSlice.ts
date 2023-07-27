@@ -40,8 +40,13 @@ const userSlice = createSlice({
       state.updated_at = action.payload.updated_at;
       state.transactions = action.payload.transactions;
     },
+    setUserProperty(state, action: PayloadAction<Partial<UserState>>) {
+      Object.keys(action.payload).forEach((key) => {
+        state[key as keyof UserState] = action.payload[key as keyof UserState] as never;
+      });
+    },
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, setUserProperty } = userSlice.actions;
 export default userSlice.reducer;

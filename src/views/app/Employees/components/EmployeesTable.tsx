@@ -22,12 +22,12 @@ const orderStatusColor: Record<
 > = {
   0: {
     label: "pending",
-    dotClass: "bg-amber-500",
+    dotClass: "bg-amber-500 flex-shrink-0",
     textClass: "text-amber-500",
   },
   1: {
     label: "approved",
-    dotClass: "bg-emerald-500",
+    dotClass: "bg-emerald-500 flex-shrink-0",
     textClass: "text-emerald-500",
   },
 };
@@ -156,14 +156,17 @@ const EmployeesTable = ({ data, loading, tableData, updateTableData }: Employees
       {
         header: "ID",
         accessorKey: "id",
+        enableSorting: false,
       },
       {
         header: t("name"),
         accessorKey: "name",
+        enableSorting: false,
       },
       {
         header: t("phone"),
         accessorKey: "phone",
+        enableSorting: false,
       },
       {
         header: t("created_at"),
@@ -171,6 +174,7 @@ const EmployeesTable = ({ data, loading, tableData, updateTableData }: Employees
         cell: (props) => {
           return <span>{dayjs(props.row.original.created_at).format("DD/MM/YYYY")}</span>;
         },
+        enableSorting: false,
       },
       {
         header: t("status"),
@@ -182,7 +186,7 @@ const EmployeesTable = ({ data, loading, tableData, updateTableData }: Employees
             <div className="flex items-center">
               <Badge className={orderStatusColor[Number(is_verified_by_company)].dotClass} />
               <span
-                className={`ml-2 rtl:mr-2 capitalize font-semibold ${
+                className={`ml-2 rtl:mr-2 font-semibold text-sm ${
                   orderStatusColor[Number(is_verified_by_company)].textClass
                 }`}
               >
@@ -191,11 +195,13 @@ const EmployeesTable = ({ data, loading, tableData, updateTableData }: Employees
             </div>
           );
         },
+        enableSorting: false,
       },
       {
         header: "",
         id: "action",
         cell: (props) => <ActionColumn row={props.row.original} />,
+        enableSorting: false,
       },
     ],
     [t]

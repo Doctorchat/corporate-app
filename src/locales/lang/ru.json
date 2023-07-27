@@ -26,15 +26,28 @@
   "cancel": "Отмена",
   "account_settings": "Настройки аккаунта",
   "sign_out": "Выйти",
-  "general_settings": "Setări generale",
+  "general_settings": "Общие настройки",
   "save": "Сохранить",
   "saving": "Сохранение",
   "reset": "Сбросить",
-  "phone_description": "Отображается как контактный номер сотрудника.",
+  "phone_description": "Показывать сотруднику в качестве контактного номера для ускорения проверки учетной записи.",
   "email_address": "Адрес электронной почты",
   "password": "Пароль",
   "forgot_password": "Забыли пароль?",
   "login": "Войти",
   "welcome_back": "Добро пожаловать!",
-  "enter_credential_to_login": "Введите учетные данные для входа."
+  "enter_credential_to_login": "Введите учетные данные для входа.",
+  "validations": {
+    "required": "Поле обязательно для заполнения.",
+    "invalid_email": "Неверный адрес электронной почты.",
+    "invalid_phone": "Неверный номер телефона."
+  },
+  "transaction_type": {
+    "chat_auto": "Авто-чат",
+    "chat_text": "Текстовый чат",
+    "chat_video": "Видео-чат",
+    "file_attachment": "Файл",
+    "medical_verdict_request": "Запрос медицинского заключения"
+  },
+  "type": "Тип"
 }

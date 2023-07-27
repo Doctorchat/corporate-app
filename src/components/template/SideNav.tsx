@@ -3,9 +3,7 @@ import ScrollBar from "@/components/ui/ScrollBar";
 import {
   SIDE_NAV_WIDTH,
   SIDE_NAV_COLLAPSED_WIDTH,
-  NAV_MODE_DARK,
   NAV_MODE_THEMED,
-  NAV_MODE_TRANSPARENT,
   SIDE_NAV_CONTENT_GUTTER,
   LOGO_X_GUTTER,
 } from "@/constants/theme.constant";
@@ -29,7 +27,6 @@ const SideNav = () => {
   const themeColor = useAppSelector((state) => state.theme.themeColor);
   const primaryColorLevel = useAppSelector((state) => state.theme.primaryColorLevel);
   const navMode = useAppSelector((state) => state.theme.navMode);
-  const mode = useAppSelector((state) => state.theme.mode);
   const direction = useAppSelector((state) => state.theme.direction);
   const currentRouteKey = useAppSelector((state) => state.base.common.currentRouteKey);
   const sideNavCollapse = useAppSelector((state) => state.theme.layout.sideNavCollapse);
@@ -42,18 +39,6 @@ const SideNav = () => {
       return `bg-${themeColor}-${primaryColorLevel} side-nav-${navMode}`;
     }
     return `side-nav-${navMode}`;
-  };
-
-  const logoMode = () => {
-    if (navMode === NAV_MODE_THEMED) {
-      return NAV_MODE_DARK;
-    }
-
-    if (navMode === NAV_MODE_TRANSPARENT) {
-      return mode;
-    }
-
-    return navMode;
   };
 
   const menuContent = (
@@ -76,7 +61,6 @@ const SideNav = () => {
         >
           <div className="side-nav-header">
             <Logo
-              mode={logoMode()}
               type={sideNavCollapse ? "streamline" : "full"}
               className={sideNavCollapse ? SIDE_NAV_CONTENT_GUTTER : LOGO_X_GUTTER}
             />
