@@ -13,7 +13,7 @@
   "current_balance": "Sold curent",
   "total_purchases": "Total tranzacții",
   "accept": "Acceptă",
-  "decline": "Respinge",
+  "delete": "Șterge",
   "client": "Client",
   "doctor": "Doctor",
   "price": "Preț",
@@ -22,7 +22,7 @@
   "download_qrcode": "Descarcă codul QR",
   "or": "sau",
   "accept_confirmation": "Ești sigur că vrei să accepți această cerere?",
-  "decline_confirmation": "Ești sigur că vrei să respingi această cerere?",
+  "delete_confirmation": "Ești sigur că vrei să ștergi aceast angajat?",
   "cancel": "Anulează",
   "account_settings": "Setări cont",
   "sign_out": "Deconectare",
@@ -49,5 +49,6 @@
     "file_attachment": "Fișier",
     "medical_verdict_request": "Cerere aviz medical"
   },
-  "type": "Tip"
+  "type": "Tip",
+  "menu": "Meniu"
 }

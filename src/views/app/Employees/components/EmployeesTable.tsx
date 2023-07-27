@@ -6,11 +6,12 @@ import cloneDeep from "lodash/cloneDeep";
 import dayjs from "dayjs";
 import type { DataTableResetHandle, OnSortParam, ColumnDef } from "@/components/shared/DataTable";
 import { useTranslation } from "react-i18next";
-import { Button, Dialog } from "@/components/ui";
+import { Button, Dialog, Tooltip } from "@/components/ui";
 import { TableQueries } from "@/@types/common";
 import { Employee } from "../types";
 import { apiDeleteEmployee, apiValidateEmployee } from "@/services/EmployeesService";
 import { useQueryClient } from "react-query";
+import { HiOutlineTrash } from "react-icons/hi2";
 
 const orderStatusColor: Record<
   number,
@@ -38,8 +39,8 @@ const ActionColumn = ({ row }: { row: Employee }) => {
   const queryClient = useQueryClient();
 
   const [isAcceptDialogOpen, setIsAcceptDialogOpen] = useState(false);
-  const [isCancelDialogOpen, setIsCancelDialogOpen] = useState(false);
-  const [loading, setLoading] = useState<"accept" | "decline" | null>(null);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [loading, setLoading] = useState<"accept" | "delete" | null>(null);
 
   const handleValidateEmployee = async () => {
     setLoading("accept");
@@ -50,15 +51,26 @@ const ActionColumn = ({ row }: { row: Employee }) => {
   };
 
   const handleDeleteEmployee = async () => {
-    setLoading("decline");
+    setLoading("delete");
     await apiDeleteEmployee(row.id);
     await queryClient.invalidateQueries("employees");
     setLoading(null);
-    setIsCancelDialogOpen(false);
+    setIsDeleteDialogOpen(false);
   };
 
   if (row.is_verified_by_company) {
-    return null;
+    return (
+      <div className="flex justify-end text-lg">
+        <Tooltip title={t("delete")}>
+          <span
+            className="cursor-pointer p-2 hover:text-red-500"
+            onClick={() => setIsDeleteDialogOpen(true)}
+          >
+            <HiOutlineTrash />
+          </span>
+        </Tooltip>
+      </div>
+    );
   }
 
   return (
@@ -68,7 +80,7 @@ const ActionColumn = ({ row }: { row: Employee }) => {
         variant="twoTone"
         color="red"
         icon={<HiX />}
-        onClick={() => setIsCancelDialogOpen(true)}
+        onClick={() => setIsDeleteDialogOpen(true)}
       >
         {t("decline")}
       </Button>
@@ -109,29 +121,29 @@ const ActionColumn = ({ row }: { row: Employee }) => {
         </div>
       </Dialog>
       <Dialog
-        isOpen={isCancelDialogOpen}
+        isOpen={isDeleteDialogOpen}
         shouldCloseOnOverlayClick={false}
         shouldCloseOnEsc={false}
-        onClose={() => setIsCancelDialogOpen(false)}
-        onRequestClose={() => setIsCancelDialogOpen(false)}
+        onClose={() => setIsDeleteDialogOpen(false)}
+        onRequestClose={() => setIsDeleteDialogOpen(false)}
       >
-        <p>{t("decline_confirmation")}</p>
+        <p>{t("delete_confirmation")}</p>
         <div className="text-right mt-6">
           <Button
             className="ltr:mr-2 rtl:ml-2"
             variant="plain"
             size="sm"
-            onClick={() => setIsCancelDialogOpen(false)}
+            onClick={() => setIsDeleteDialogOpen(false)}
           >
             {t("cancel")}
           </Button>
           <Button
             variant="solid"
             size="sm"
-            loading={loading === "decline"}
+            loading={loading === "delete"}
             onClick={handleDeleteEmployee}
           >
-            {t("decline")}
+            {t("delete")}
           </Button>
         </div>
       </Dialog>

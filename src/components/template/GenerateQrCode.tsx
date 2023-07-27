@@ -1,4 +1,3 @@
-import Dropdown from "@/components/ui/Dropdown";
 import withHeaderItem from "@/utils/hoc/withHeaderItem";
 import classNames from "classnames";
 import { HiOutlineQrCode, HiOutlineSquare2Stack, HiOutlineCheck } from "react-icons/hi2";
@@ -6,16 +5,20 @@ import type { CommonProps } from "@/@types/common";
 import { Button, Tooltip } from "../ui";
 import { useTranslation } from "react-i18next";
 import React from "react";
-import { useQuery } from "react-query";
-import { apiGetInviteInfo } from "@/services/AuthService";
+import { useAppSelector } from "@/store";
+import { useOnClickOutside } from "usehooks-ts";
 
 export const GenerateQrCodeContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   className,
 }) => {
   const { t } = useTranslation();
-  const { data, isLoading } = useQuery(["invite-info"], () => apiGetInviteInfo(), {
-    refetchOnWindowFocus: false,
-  });
+
+  const company = useAppSelector((state) => state.auth.user);
+
+  const inviteInfo = {
+    qr: `https://api-dev.doctorchat.md/qrcode/company/${company.id}`,
+    url: `https://app.doctorchat.md/registration-flow?company_id=${company.id}`,
+  };
 
   const [isCopied, setIsCopied] = React.useState(false);
 
@@ -46,7 +49,7 @@ export const GenerateQrCodeContent: React.FC<React.HTMLAttributes<HTMLDivElement
     <div className={classNames(className)}>
       <div className="p-1 border rounded-lg">
         <img
-          src={isLoading ? "" : data?.data.qr}
+          src={inviteInfo.qr}
           alt="QR Code"
           className="w-full h-full aspect-square object-contain"
         />
@@ -61,9 +64,9 @@ export const GenerateQrCodeContent: React.FC<React.HTMLAttributes<HTMLDivElement
             "mt-2 border rounded-lg flex items-center justify-center overflow-hidden py-1 px-2 cursor-pointer select-none",
             "hover:bg-gray-100 border-gray-200"
           )}
-          onClick={() => handleCopy(data?.data.url)}
+          onClick={() => handleCopy(inviteInfo.url)}
         >
-          <span className="truncate">{data?.data.url}</span>
+          <span className="truncate">{inviteInfo.url}</span>
           {isCopied ? (
             <HiOutlineCheck className="w-6 flex-shrink-0 h-6 ml-2 text-emerald-500" />
           ) : (
@@ -82,7 +85,7 @@ export const GenerateQrCodeContent: React.FC<React.HTMLAttributes<HTMLDivElement
         variant="solid"
         size="sm"
         className="w-full mt-2"
-        onClick={() => handleDownload(data?.data.qr)}
+        onClick={() => handleDownload(inviteInfo.qr)}
       >
         {t("download_qrcode")}
       </Button>
@@ -91,19 +94,30 @@ export const GenerateQrCodeContent: React.FC<React.HTMLAttributes<HTMLDivElement
 };
 
 const _GenerateQrCode = ({ className }: CommonProps) => {
-  const Title = (
-    <div className={classNames(className, "text-2xl")}>
-      <HiOutlineQrCode />
-    </div>
-  );
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  useOnClickOutside(ref, () => setIsVisible(false));
 
   return (
-    <div>
-      <Dropdown menuStyle={{ minWidth: 240 }} renderTitle={Title} placement="bottom-end">
-        <Dropdown.Item variant="header">
-          <GenerateQrCodeContent className="p-2 max-w-xs" />
-        </Dropdown.Item>
-      </Dropdown>
+    <div ref={ref} className="relative">
+      <div
+        className={classNames(className, "text-2xl")}
+        onClick={() => setIsVisible((prev) => !prev)}
+      >
+        <HiOutlineQrCode />
+      </div>
+      <div
+        className={classNames(
+          "absolute top-full bg-white right-full translate-x-10 shadow-xl border border-neutral-200 rounded-md transition-all",
+          isVisible
+            ? "visible opacity-100 pointer-events-auto translate-y-2"
+            : "invisible opacity-0 pointer-events-none translate-y-1"
+        )}
+      >
+        <GenerateQrCodeContent className="p-2 md:max-w-xs max-w-[280px]" />
+      </div>
     </div>
   );
 };

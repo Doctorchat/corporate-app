@@ -11,9 +11,9 @@
   "recent_purchases": "Последние покупки",
   "view_all": "Посмотреть все",
   "current_balance": "Текущий баланс",
-  "total_purchases": "Всего покупок",
+  "total_purchases": "Всего транзакций",
   "accept": "Принять",
-  "decline": "Отклонить",
+  "delete": "Удалить",
   "client": "Клиент",
   "doctor": "Доктор",
   "price": "Цена",
@@ -22,7 +22,7 @@
   "download_qrcode": "Скачать QR-код",
   "or": "или",
   "accept_confirmation": "Вы уверены, что хотите принять этот запрос?",
-  "decline_confirmation": "Вы уверены, что хотите отклонить этот запрос?",
+  "delete_confirmation": "Вы уверены, что хотите удалить этого сотрудника?",
   "cancel": "Отмена",
   "account_settings": "Настройки аккаунта",
   "sign_out": "Выйти",
@@ -49,5 +49,6 @@
     "file_attachment": "Файл",
     "medical_verdict_request": "Запрос медицинского заключения"
   },
-  "type": "Тип"
+  "type": "Тип",
+  "menu": "Меню"
 }
