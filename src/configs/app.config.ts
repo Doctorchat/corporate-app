@@ -8,7 +8,7 @@ export type AppConfig = {
 };
 
 const appConfig: AppConfig = {
-  apiPrefix: "https://api-dev.doctorchat.md/api/md/",
+  apiPrefix: import.meta.env.VITE_API_URL as string,
   authenticatedEntryPath: "/home",
   unAuthenticatedEntryPath: "/sign-in",
   tourPath: "/",
