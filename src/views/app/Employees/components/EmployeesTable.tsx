@@ -58,97 +58,99 @@ export const ActionColumn = ({ row }: { row: Employee }) => {
     setIsDeleteDialogOpen(false);
   };
 
-  if (row.is_verified_by_company) {
-    return (
-      <div className="flex justify-end text-lg">
-        <Tooltip title={t("delete")}>
-          <span
-            className="cursor-pointer p-2 hover:text-red-500"
-            onClick={() => setIsDeleteDialogOpen(true)}
-          >
-            <HiOutlineTrash />
-          </span>
-        </Tooltip>
-      </div>
-    );
-  }
-
   return (
-    <div className="flex justify-end text-base space-x-2">
-      <Button
-        size="xs"
-        variant="twoTone"
-        color="red"
-        icon={<HiX />}
-        onClick={() => setIsDeleteDialogOpen(true)}
-      >
-        {t("delete")}
-      </Button>
-      <Button
-        size="xs"
-        variant="twoTone"
-        color="emerald"
-        icon={<HiOutlineCheck />}
-        onClick={() => setIsAcceptDialogOpen(true)}
-      >
-        {t("accept")}
-      </Button>
-
-      <Dialog
-        isOpen={isAcceptDialogOpen}
-        shouldCloseOnOverlayClick={false}
-        shouldCloseOnEsc={false}
-        onClose={() => setIsAcceptDialogOpen(false)}
-        onRequestClose={() => setIsAcceptDialogOpen(false)}
-      >
-        <p>{t("accept_confirmation")}</p>
-        <div className="text-right mt-6">
-          <Button
-            className="ltr:mr-2 rtl:ml-2"
-            variant="plain"
-            size="sm"
-            onClick={() => setIsAcceptDialogOpen(false)}
-          >
-            {t("cancel")}
-          </Button>
-          <Button
-            variant="solid"
-            size="sm"
-            loading={loading === "accept"}
-            onClick={handleValidateEmployee}
-          >
-            {t("accept")}
-          </Button>
+    <>
+      {row.is_verified_by_company === true && (
+        <div className="flex justify-end text-lg">
+          <Tooltip title={t("delete")}>
+            <span
+              className="cursor-pointer p-2 hover:text-red-500"
+              onClick={() => setIsDeleteDialogOpen(true)}
+            >
+              <HiOutlineTrash />
+            </span>
+          </Tooltip>
         </div>
-      </Dialog>
-      <Dialog
-        isOpen={isDeleteDialogOpen}
-        shouldCloseOnOverlayClick={false}
-        shouldCloseOnEsc={false}
-        onClose={() => setIsDeleteDialogOpen(false)}
-        onRequestClose={() => setIsDeleteDialogOpen(false)}
-      >
-        <p>{t("delete_confirmation")}</p>
-        <div className="text-right mt-6">
+      )}
+
+      {row.is_verified_by_company === false && (
+        <div className="flex justify-end text-base space-x-2">
           <Button
-            className="ltr:mr-2 rtl:ml-2"
-            variant="plain"
-            size="sm"
-            onClick={() => setIsDeleteDialogOpen(false)}
-          >
-            {t("cancel")}
-          </Button>
-          <Button
-            variant="solid"
-            size="sm"
-            loading={loading === "delete"}
-            onClick={handleDeleteEmployee}
+            size="xs"
+            variant="twoTone"
+            color="red"
+            icon={<HiX />}
+            onClick={() => setIsDeleteDialogOpen(true)}
           >
             {t("delete")}
           </Button>
+          <Button
+            size="xs"
+            variant="twoTone"
+            color="emerald"
+            icon={<HiOutlineCheck />}
+            onClick={() => setIsAcceptDialogOpen(true)}
+          >
+            {t("accept")}
+          </Button>
+
+          <Dialog
+            isOpen={isAcceptDialogOpen}
+            shouldCloseOnOverlayClick={false}
+            shouldCloseOnEsc={false}
+            onClose={() => setIsAcceptDialogOpen(false)}
+            onRequestClose={() => setIsAcceptDialogOpen(false)}
+          >
+            <p>{t("accept_confirmation")}</p>
+            <div className="text-right mt-6">
+              <Button
+                className="ltr:mr-2 rtl:ml-2"
+                variant="plain"
+                size="sm"
+                onClick={() => setIsAcceptDialogOpen(false)}
+              >
+                {t("cancel")}
+              </Button>
+              <Button
+                variant="solid"
+                size="sm"
+                loading={loading === "accept"}
+                onClick={handleValidateEmployee}
+              >
+                {t("accept")}
+              </Button>
+            </div>
+          </Dialog>
+          <Dialog
+            isOpen={isDeleteDialogOpen}
+            shouldCloseOnOverlayClick={false}
+            shouldCloseOnEsc={false}
+            onClose={() => setIsDeleteDialogOpen(false)}
+            onRequestClose={() => setIsDeleteDialogOpen(false)}
+          >
+            <p>{t("delete_confirmation")}</p>
+            <div className="text-right mt-6">
+              <Button
+                className="ltr:mr-2 rtl:ml-2"
+                variant="plain"
+                size="sm"
+                onClick={() => setIsDeleteDialogOpen(false)}
+              >
+                {t("cancel")}
+              </Button>
+              <Button
+                variant="solid"
+                size="sm"
+                loading={loading === "delete"}
+                onClick={handleDeleteEmployee}
+              >
+                {t("delete")}
+              </Button>
+            </div>
+          </Dialog>
         </div>
-      </Dialog>
-    </div>
+      )}
+    </>
   );
 };
 
