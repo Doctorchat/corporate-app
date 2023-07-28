@@ -93,63 +93,63 @@ export const ActionColumn = ({ row }: { row: Employee }) => {
           >
             {t("accept")}
           </Button>
-
-          <Dialog
-            isOpen={isAcceptDialogOpen}
-            shouldCloseOnOverlayClick={false}
-            shouldCloseOnEsc={false}
-            onClose={() => setIsAcceptDialogOpen(false)}
-            onRequestClose={() => setIsAcceptDialogOpen(false)}
-          >
-            <p>{t("accept_confirmation")}</p>
-            <div className="text-right mt-6">
-              <Button
-                className="ltr:mr-2 rtl:ml-2"
-                variant="plain"
-                size="sm"
-                onClick={() => setIsAcceptDialogOpen(false)}
-              >
-                {t("cancel")}
-              </Button>
-              <Button
-                variant="solid"
-                size="sm"
-                loading={loading === "accept"}
-                onClick={handleValidateEmployee}
-              >
-                {t("accept")}
-              </Button>
-            </div>
-          </Dialog>
-          <Dialog
-            isOpen={isDeleteDialogOpen}
-            shouldCloseOnOverlayClick={false}
-            shouldCloseOnEsc={false}
-            onClose={() => setIsDeleteDialogOpen(false)}
-            onRequestClose={() => setIsDeleteDialogOpen(false)}
-          >
-            <p>{t("delete_confirmation")}</p>
-            <div className="text-right mt-6">
-              <Button
-                className="ltr:mr-2 rtl:ml-2"
-                variant="plain"
-                size="sm"
-                onClick={() => setIsDeleteDialogOpen(false)}
-              >
-                {t("cancel")}
-              </Button>
-              <Button
-                variant="solid"
-                size="sm"
-                loading={loading === "delete"}
-                onClick={handleDeleteEmployee}
-              >
-                {t("delete")}
-              </Button>
-            </div>
-          </Dialog>
         </div>
       )}
+
+      <Dialog
+        isOpen={isAcceptDialogOpen}
+        shouldCloseOnOverlayClick={false}
+        shouldCloseOnEsc={false}
+        onClose={() => setIsAcceptDialogOpen(false)}
+        onRequestClose={() => setIsAcceptDialogOpen(false)}
+      >
+        <p>{t("accept_confirmation")}</p>
+        <div className="text-right mt-6">
+          <Button
+            className="ltr:mr-2 rtl:ml-2"
+            variant="plain"
+            size="sm"
+            onClick={() => setIsAcceptDialogOpen(false)}
+          >
+            {t("cancel")}
+          </Button>
+          <Button
+            variant="solid"
+            size="sm"
+            loading={loading === "accept"}
+            onClick={handleValidateEmployee}
+          >
+            {t("accept")}
+          </Button>
+        </div>
+      </Dialog>
+      <Dialog
+        isOpen={isDeleteDialogOpen}
+        shouldCloseOnOverlayClick={false}
+        shouldCloseOnEsc={false}
+        onClose={() => setIsDeleteDialogOpen(false)}
+        onRequestClose={() => setIsDeleteDialogOpen(false)}
+      >
+        <p>{t("delete_confirmation")}</p>
+        <div className="text-right mt-6">
+          <Button
+            className="ltr:mr-2 rtl:ml-2"
+            variant="plain"
+            size="sm"
+            onClick={() => setIsDeleteDialogOpen(false)}
+          >
+            {t("cancel")}
+          </Button>
+          <Button
+            variant="solid"
+            size="sm"
+            loading={loading === "delete"}
+            onClick={handleDeleteEmployee}
+          >
+            {t("delete")}
+          </Button>
+        </div>
+      </Dialog>
     </>
   );
 };

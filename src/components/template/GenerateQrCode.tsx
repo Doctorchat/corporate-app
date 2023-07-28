@@ -16,8 +16,8 @@ export const GenerateQrCodeContent: React.FC<React.HTMLAttributes<HTMLDivElement
   const company = useAppSelector((state) => state.auth.user);
 
   const inviteInfo = {
-    qr: `https://api-dev.doctorchat.md/qrcode/company/${company.id}`,
-    url: `https://app.doctorchat.md/registration-flow?company_id=${company.id}`,
+    qr: `${import.meta.env.VITE_API_URL}/qrcode/company/${company.id}`,
+    url: `${import.meta.env.VITE_APP_URL}/registration-flow?company_id=${company.id}`,
   };
 
   const [isCopied, setIsCopied] = React.useState(false);

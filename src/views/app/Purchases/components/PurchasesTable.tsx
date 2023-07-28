@@ -49,21 +49,6 @@ const PurchasesTable = ({ data, loading, tableData, updateTableData }: Purchases
         enableSorting: false,
       },
       {
-        header: t("price"),
-        accessorKey: "amount",
-        cell: (props) => {
-          return (
-            <NumericFormat
-              displayType="text"
-              value={Number(props.row.original.amount)}
-              suffix=" MDL"
-              thousandSeparator={true}
-            />
-          );
-        },
-        enableSorting: false,
-      },
-      {
         header: t("type"),
         accessorKey: "transaction_type",
         cell: (props) => {
