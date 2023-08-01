@@ -9,6 +9,7 @@ import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import type { CommonProps } from "@/@types/common";
 import { useTranslation } from "react-i18next";
+import { ActionLink } from "@/components/shared";
 
 interface SignInFormProps extends CommonProps {
   disableSubmit?: boolean;
@@ -29,7 +30,7 @@ const validationSchema = Yup.object().shape({
 const SignInForm = (props: SignInFormProps) => {
   const { t } = useTranslation();
 
-  const { disableSubmit = false, className } = props;
+  const { disableSubmit = false, className, forgotPasswordUrl = "/forgot-password" } = props;
 
   const [message, setMessage] = useTimeOutMessage();
 
@@ -100,9 +101,9 @@ const SignInForm = (props: SignInFormProps) => {
                   component={PasswordInput}
                 />
               </FormItem>
-              {/* <div className="flex justify-end mb-6">
+              <div className="flex justify-end mb-6">
                 <ActionLink to={forgotPasswordUrl}>{t("forgot_password")}</ActionLink>
-              </div> */}
+              </div>
               <Button block loading={isSubmitting} variant="solid" type="submit">
                 {t("login")}
               </Button>

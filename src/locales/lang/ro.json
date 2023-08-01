@@ -40,7 +40,8 @@
   "validations": {
     "required": "Câmpul este obligatoriu.",
     "invalid_email": "Adresa de email nu este validă.",
-    "invalid_phone": "Numărul de telefon nu este valid."
+    "invalid_phone": "Numărul de telefon nu este valid.",
+    "passwords_mismatch": "Parolele nu se potrivesc."
   },
   "transaction_type": {
     "chat_auto": "Chat automat",
@@ -51,5 +52,28 @@
   },
   "type": "Tip",
   "menu": "Meniu",
-  "validations_requests": "Cereri de validare"
+  "validations_requests": "Cereri de validare",
+  "forgot_password_page": {
+    "title": "A-ţi uitat parola",
+    "description": "Introdu adresa de email pentru a primi un cod de verificare.",
+    "sent": {
+      "title": "Verifică-ți emailul",
+      "description": "Ți-am trimis un email cu instrucțiuni pentru resetarea parolei."
+    }
+  },
+  "send_email": "Trimite email",
+  "back_to": "Înapoi la",
+  "reset_password_page": {
+    "title": "Resetează parola",
+    "description": "Introdu o nouă parolă pentru contul tău.",
+    "success": {
+      "title": "Parola a fost resetată",
+      "description": "Poți să te autentifici cu noua parolă."
+    }
+  },
+  "confirm_password": "Confirmă parola",
+  "continue": "Continuă",
+  "submit": "Trimite",
+  "submitting": "Se trimite...",
+  "email_code": "Cod primit prin email"
 }

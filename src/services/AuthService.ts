@@ -16,6 +16,27 @@ export async function apiSignOut() {
   });
 }
 
+export async function apiForgotPassword(data: { email: string }) {
+  return ApiService.fetchData({
+    url: "/auth/companies/forgot-password",
+    method: "post",
+    data,
+  });
+}
+
+export async function apiResetPassword(data: {
+  email: string;
+  code: string;
+  password: string;
+  confirm_password: string;
+}) {
+  return ApiService.fetchData({
+    url: "/auth/companies/reset-password",
+    method: "post",
+    data,
+  });
+}
+
 export async function apiAuthRevalidate() {
   return ApiService.fetchData<Omit<SignInResponse, "token">>({
     url: "/companies/company",
