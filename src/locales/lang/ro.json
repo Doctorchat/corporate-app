@@ -41,7 +41,8 @@
     "required": "Câmpul este obligatoriu.",
     "invalid_email": "Adresa de email nu este validă.",
     "invalid_phone": "Numărul de telefon nu este valid.",
-    "passwords_mismatch": "Parolele nu se potrivesc."
+    "passwords_mismatch": "Parolele nu se potrivesc.",
+    "min_length_8": "Trebuie să conțină cel puțin 8 caractere."
   },
   "transaction_type": {
     "chat_auto": "Chat automat",
@@ -75,5 +76,10 @@
   "continue": "Continuă",
   "submit": "Trimite",
   "submitting": "Se trimite...",
-  "email_code": "Cod primit prin email"
+  "email_code": "Cod primit prin email",
+  "current_password": "Parola curentă",
+  "new_password": "Parola nouă",
+  "confirm_new_password": "Confirmă parola nouă",
+  "profile_updated_successfully": "Profilul a fost actualizat cu succes.",
+  "password_updated_successfully": "Parola a fost actualizată cu succes."
 }

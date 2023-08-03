@@ -63,6 +63,18 @@ export async function apiChangeContactNumber(data: { contact_number: string }) {
   });
 }
 
+export async function apiChangePassword(data: {
+  current_password: string;
+  new_password: string;
+  confirm_password: string;
+}) {
+  return ApiService.fetchData({
+    url: "/companies/change-password",
+    method: "put",
+    data,
+  });
+}
+
 export async function apiGetInviteInfo() {
   return ApiService.fetchData<{ qr: string; url: string }>({
     url: `/companies/invite`,
