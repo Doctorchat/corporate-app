@@ -70,7 +70,7 @@ export async function apiChangePassword(data: {
 }) {
   return ApiService.fetchData({
     url: "/companies/change-password",
-    method: "put",
+    method: "post",
     data,
   });
 }
