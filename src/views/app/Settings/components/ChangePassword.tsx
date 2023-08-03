@@ -78,7 +78,7 @@ const ChangePassword = () => {
                   <Field
                     type="password"
                     autoComplete="off"
-                    name="password"
+                    name="current_password"
                     placeholder={t("current_password")}
                     component={Input}
                   />
@@ -87,7 +87,7 @@ const ChangePassword = () => {
                   <Field
                     type="password"
                     autoComplete="off"
-                    name="newPassword"
+                    name="new_password"
                     placeholder={t("new_password")}
                     component={Input}
                   />
@@ -100,7 +100,7 @@ const ChangePassword = () => {
                   <Field
                     type="password"
                     autoComplete="off"
-                    name="confirmNewPassword"
+                    name="confirm_password"
                     placeholder={t("confirm_new_password")}
                     component={Input}
                   />
