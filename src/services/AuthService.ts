@@ -66,7 +66,7 @@ export async function apiChangeContactNumber(data: { contact_number: string }) {
 export async function apiChangePassword(data: {
   current_password: string;
   new_password: string;
-  confirm_new_password: string;
+  new_password_confirmation: string;
 }) {
   return ApiService.fetchData({
     url: "/companies/change-password",

@@ -12,13 +12,13 @@ import { apiChangePassword } from "@/services/AuthService";
 type PasswordFormModel = {
   current_password: string;
   new_password: string;
-  confirm_new_password: string;
+  new_password_confirmation: string;
 };
 
 const validationSchema = Yup.object().shape({
   current_password: Yup.string().required("validations.required"),
   new_password: Yup.string().min(8, "min_length_8").required("validations.required"),
-  confirm_new_password: Yup.string()
+  new_password_confirmation: Yup.string()
     .required("validations.required")
     .oneOf([Yup.ref("new_password"), ""], "validations.password_mismatch"),
 });
@@ -34,7 +34,7 @@ const ChangePassword = () => {
       await apiChangePassword({
         current_password: values.current_password,
         new_password: values.new_password,
-        confirm_new_password: values.confirm_new_password,
+        new_password_confirmation: values.new_password_confirmation,
       });
       toast.push(<Notification title={t("password_updated_successfully")} type="success" />, {
         placement: "top-center",
@@ -55,7 +55,7 @@ const ChangePassword = () => {
         initialValues={{
           current_password: "",
           new_password: "",
-          confirm_new_password: "",
+          new_password_confirmation: "",
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
@@ -93,14 +93,14 @@ const ChangePassword = () => {
                   />
                 </FormRow>
                 <FormRow
-                  name="confirm_new_password"
+                  name="new_password_confirmation"
                   label={t("confirm_new_password")}
                   {...validatorProps}
                 >
                   <Field
                     type="password"
                     autoComplete="off"
-                    name="confirm_new_password"
+                    name="new_password_confirmation"
                     placeholder={t("confirm_new_password")}
                     component={Input}
                   />
