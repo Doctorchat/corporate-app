@@ -1,9 +1,9 @@
-name: Doctochat Corporate Prod CI/CD
+name: Doctochat Corporate Dev CI/CD
 
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   build:
@@ -27,4 +27,4 @@ jobs:
           password: ${{ secrets.SSH_PASS }}
           private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
           scp_source: "build/"
-          scp_target: ${{ secrets.TARGET_COMPANY_APP }}
+          scp_target: ${{ secrets.TARGET_COMPANY_APP_DEV }}
