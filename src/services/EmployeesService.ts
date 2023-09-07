@@ -20,3 +20,11 @@ export async function apiDeleteEmployee<T>(id: number) {
     method: "delete",
   });
 }
+
+export async function apiAddSoldCurrent<T>(data: { amount: number }) {
+  return ApiService.fetchData<T>({
+    url: `/companies/topup`,
+    method: "post",
+    data,
+  });
+}
