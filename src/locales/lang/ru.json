@@ -53,7 +53,8 @@
     "chat_text": "Текстовый чат",
     "chat_video": "Видео-чат",
     "file_attachment": "Файл",
-    "medical_verdict_request": "Запрос медицинского заключения"
+    "medical_verdict_request": "Запрос медицинского заключения",
+    "topup": "Пополнение счета"
   },
   "type": "Тип",
   "menu": "Меню",

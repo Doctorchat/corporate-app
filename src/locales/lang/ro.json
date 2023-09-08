@@ -53,7 +53,8 @@
     "chat_text": "Chat text",
     "chat_video": "Chat video",
     "file_attachment": "Fișier",
-    "medical_verdict_request": "Cerere aviz medical"
+    "medical_verdict_request": "Cerere aviz medical",
+    "topup": "Suplinire cont"
   },
   "type": "Tip",
   "menu": "Meniu",
